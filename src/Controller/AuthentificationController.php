@@ -36,13 +36,15 @@ class AuthentificationController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->iqSubmitted() && $form->isValid()){
-            $hach = $encoder->encodePassword($User, $User->getPassword());
+        if($form->isSubmitted() && $form->isValid()){
+            $hach = $encoder->encodePassword($user, $user->getPassword());
 
-            $user->setPassword($hash);
-            
+            $user->setPassword($hach);
+
             $manager->persist($user);
             $manager->flush();
+
+            return $this->redirectToRoute('authentification_connexion');
         }
 
         return $this->render('authentification/registration.html.twig', [ 
@@ -62,4 +64,10 @@ class AuthentificationController extends AbstractController
             'form' =>$formAuth->createView()
         ]);
     }
+
+      /**
+     * @Route("/deconnexion", name="authentification_deconnexion")
+     */
+    public function logout () {}
+
 }

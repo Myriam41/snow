@@ -5,12 +5,26 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: mail
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+
+            provider: in_database
+
+            form_login:
+                login_path: authentification_connexion
+                check_path: authentification_connexion
+
+            logout:
+                path: authentification_deconnexion
+                target: tricks
 
             # activate different ways to authenticate
 
