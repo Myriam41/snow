@@ -35,7 +35,7 @@ class AuthentificationController extends AbstractController
     }
 
      /**
-     * @Route("/connection", name="authentification_connexion")
+     * @Route("/connexion", name="authentification_connexion")
      */
     public function online ()
     {
@@ -43,9 +43,7 @@ class AuthentificationController extends AbstractController
         $formAuth = $this->createForm(RegistrationType::class);
 
         return $this->render('authentification/online.html.twig', [ 
-            'form' =>$form->createView()
+            'form' =>$formAuth->createView()
         ]);
     }
-
-
 }
