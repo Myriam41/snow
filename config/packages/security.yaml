@@ -24,7 +24,7 @@ security:
 
             logout:
                 path: authentification_deconnexion
-                target: tricks
+                target: home
 
             # activate different ways to authenticate
 

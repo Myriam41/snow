@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class TricksController extends AbstractController
 {
     /**
-     * @Route("/tricks", name="tricks")
+     * @Route("/", name="home")
      */
-    public function liste()
+    public function home()
     {
         return $this->render('tricks/home.html.twig', [
             'controller_name' => 'TricksController',

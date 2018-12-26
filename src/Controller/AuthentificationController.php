@@ -52,20 +52,15 @@ class AuthentificationController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/connexion", name="authentification_connexion")
      */
     public function online ()
     {
-        $user = new User();
-        $formAuth = $this->createForm(RegistrationType::class);
-
-        return $this->render('authentification/online.html.twig', [ 
-            'form' =>$formAuth->createView()
-        ]);
+        return $this->render('authentification/online.html.twig');
     }
 
-      /**
+    /**
      * @Route("/deconnexion", name="authentification_deconnexion")
      */
     public function logout () {}
