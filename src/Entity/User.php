@@ -3,11 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *  fields = {"mail"},
+ *  message = "L'email que vous avez indiqué est déjà utilisé"
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -23,15 +30,20 @@ class User
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\Email()
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8")
      */
     private $Password;
 
-    public $confirmPassword;
+    /**
+     * @Assert\EqualTo(propertyPath="confirm_password")
+     */   
+    private $confirmPassword;
 
     public function getId(): ?int
     {
@@ -72,5 +84,34 @@ class User
         $this->Password = $Password;
 
         return $this;
+    }
+
+    public function getConfirmPassword(): ?string
+    {
+        return $this->confirmPassword;
+    }
+
+    public function setConfirmPassword(string $confirmPassword): self
+    {
+        $this->confirmPassword = $confirmPassword;
+
+        return $this;
+    }
+
+    public function getUsername()
+    {
+        
+    }
+
+    public function eraseCredentials() {}
+
+    public function getSalt()
+    {
+        
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
     }
 }
