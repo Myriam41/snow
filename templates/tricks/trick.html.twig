@@ -3,11 +3,9 @@
 {% block title %}Tricks {{ controller_name }}!{% endblock %}
 
 {% block body %}
-<h1>Liste des Tricks</h1>
+<h1>{{ Trick.Type }}  {{ Trick.Name }}</h1>
 
-{% for Trick in Tricks %}
 <article>
-    <h2><a title="Détails de la figure" href={{path('showTrick', {'id' : Trick.id})}}>{{ Trick.Type }}  {{ Trick.Name }}</a></h2>
     <div class="metadata"> 
         {{ Trick.Switch }}
     </div>
@@ -15,6 +13,5 @@
         {{ Trick.Description | raw}}
     </div>
 </article>
-{% endfor %}
 
 {% endblock %}
