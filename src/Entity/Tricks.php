@@ -36,6 +36,11 @@ class Tricks
      */
     private $Switch;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $Image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Tricks
     public function setSwitch(?bool $Switch): self
     {
         $this->Switch = $Switch;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->Image;
+    }
+
+    public function setImage(?string $Image): self
+    {
+        $this->Switch = $Image;
 
         return $this;
     }

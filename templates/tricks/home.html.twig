@@ -6,6 +6,7 @@
 <h1>Liste des Tricks</h1>
 
 {% for Trick in Tricks %}
+<img src= "{{ Trick.image}}" alt=""/>
 <article>
     <h2><a title="Détails de la figure" href={{path('showTrick', {'id' : Trick.id})}}>{{ Trick.Type }}  {{ Trick.Name }}</a></h2>
     <div class="metadata"> 
