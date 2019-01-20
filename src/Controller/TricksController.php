@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Tricks;
+use App\Form\TrickType;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\TricksRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TricksController extends AbstractController
@@ -38,23 +41,33 @@ class TricksController extends AbstractController
      /**
      * @Route("addtrick/", name="addTrick")
      */
-    public function addTrick()
+    public function addTrick(Request $request)
     {   
-        $manager = $this->getDoctrine()->getmanager();
-        
         $Trick = new Tricks();
-        $Trick->setDescription();
-        $Trick->setImage();
-        $Trick->setName();
-        $Trick->setSwitch();
-        $Trick->setType();
+        $formTrick = $this->createForm(TrickType::class, $Trick);
+ 
 
-        $manager->persist($Trick);
+       // $Trick->setName();
+       // $Trick->setType();
+       // $Trick->setDescription();
+       // $Trick->setImage();
+       $formTrick->handleRequest($request);
 
-        $manager->flush();
+       if ($formTrick->isSubmitted() && $formTrick->isValid()) {
+           $manager = $this->getDoctrine()->getmanager();
+           $manager->persist($Trick);
+           $manager->flush();
+   
+           return $this->redirectToRoute('showTrick', [
+               'id' => $Trick->getId()
+           ]);
 
-        return new Response('Le nouveau Trick  bien été enregistré');
-
+           return new Response('Le nouveau Trick a bien été enregistré');
+           }
+        else {
+            return $this->redirectToRoute('home');
+            return new Response('Aucun nouveau Trick a été enregistré');
+        }
      //   return $this->render('tricks/trick.html.twig', [
         //    'controller_name' => 'TricksController', 'Trick'=> $Trick
       //  ]);
