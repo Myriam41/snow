@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{{ form_start(formTrick) }}
+    {{ form_widget(form) }}
 
+    <input type="submit" class="btn" value="Create" />
+{{ form_end(formTrick) }}
 
 {% endblock %}
