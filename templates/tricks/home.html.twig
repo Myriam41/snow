@@ -4,11 +4,15 @@
 
 {% block body %}
 <h1>Liste des Tricks</h1>
+<div class="button-block" >
+    <a href={{path('addTrick')}}> "ajouter un Trick" </a>
+</div>
 
 {% for Trick in Tricks %}
 <img src= "{{ Trick.image}}" alt=""/>
 <article>
-    <h2><a title="Détails de la figure" href={{path('showTrick', {'id' : Trick.id})}}>{{ Trick.Type }}  {{ Trick.Name }}</a></h2>
+    <h2><a title="Détails de la figure" href={{path('showTrick', {'id' : Trick.id})}}>
+        {{ Trick.Type }}  {{ Trick.Name }}</a></h2>
     <div class="metadata"> 
         {{ Trick.Switch }}
     </div>
